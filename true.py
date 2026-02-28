@@ -9,86 +9,83 @@ while True:
         print("3. Калькулятор кредита")
         print("4. Выход")
         vb = input("Выбор:")
-
+        
         if vb == "1":
             password = input("Введите пароль администратора:")
-            if password == "admin123":
-                admin = False
-                print("Успешный вход")
-            else:
+            if password == "admin123": 
                 admin = True
-                print("Неверный пароль")
-
+                print("Успешный вход!")
+            else:
+                print("Неверный пароль!")
+                
         elif vb == "2":
-            if len(sotr) != 0:
+            if len(sotr) == 0:
                 print("Нет сотрудников")
             else:
                 for i, num in enumerate(sotr, 1):
-                    print(f"{i}. ФИО: {num[1]}, Зарплата: {num[0]} руб.")
-
+                    print(f"{i}. ФИО: {num[0]}, Зарплата: {num[4]} руб.")
+                    
         elif vb == "3":
             sum = int(input("Введите сумму кредита:"))
             pribil = int(input("Введите прибыль:"))
             pro = int(input("Введите процент:"))
             pro_prib = int(input("Введите процент от прибыли:"))
-
-            x = sum
-            sum1 = pro / 100
+            x = 0
+            sum1 = sum * (pro / 100)
             itog = 0
-
-            while x >= sum1:
-                x = x - pro_prib * 2 
-                itog += 2 
-
-            print(f"Количество месяцев: {itog}")
-
+            while x <= sum1:
+                x = x + pro_prib
+                itog += 1
+            print(f"Количество месяцев: {int(itog)}")
+            
         elif vb == "4":
-            continue
-
+            break
         else:
-            print("Неверный выбор")
-
-    else:
+            print("Неверный выбор!")
+    
+    else:  
+        print("\n=== Администратор ===")
         print("1. Добавить сотрудника")
         print("2. Список сотрудников")
         print("3. Калькулятор кредита")
         print("4. Выйти из режима администратора")
         print("5. Выход из программы")
         vb = input("Выбор:")
-
-        if vb == "1":
+        
+        if vb == "1":  
             fio = input("ФИО:")
             money = int(input("Ставка работника:"))
             hours = int(input("Количество часов в неделе:"))
             day = int(input("Количество рабочих дней в неделе:"))
-
-            zp = money + hours + day
-            sotr.append([zp, fio, day, hours, money])
-            print("Сотрудник добавлен")
-
-        elif vb == "2":
+            zp = hours * money * day
+            sotr.append([fio, money, hours, day, zp])
+            print("Сотрудник добавлен!")
+            
+        elif vb == "2":  
             if len(sotr) == 0:
                 print("Нет сотрудников")
             else:
                 for i, num in enumerate(sotr, 1):
-                    print(f"{i}. ФИО: {num[4]}, Зарплата: {num[0]} руб.")
-
-        elif vb == "3":
+                    print(f"{i}. ФИО: {num[0]}, Ставка: {num[1]}, Часов: {num[2]}, Дней: {num[3]}, Зарплата: {num[4]} руб.")
+                    
+        elif vb == "3":  
             sum = int(input("Введите сумму кредита:"))
-            pribil = int(input("Введите прибыль:"))3
+            pribil = int(input("Введите прибыль:"))
             pro = int(input("Введите процент:"))
             pro_prib = int(input("Введите процент от прибыли:"))
-
-            itog = math.sqrt(sum + pribil + pro + pro_prib)
+            x = 0
+            sum1 = sum * (pro / 100)
+            itog = 0
+            while x <= sum1:
+                x = x + pro_prib
+                itog += 1
             print(f"Количество месяцев: {int(itog)}")
-
-        elif vb == "4":
-            admin = True  # выйти нельзя
+            
+        elif vb == "4":  
+            admin = False
             print("Вы вышли из режима администратора")
-
-        elif vb == "5":
-            print("До свидания")
+            
+        elif vb == "5":  
             break
-
         else:
-            print("Неверный выбор")
+            print("Неверный выбор!")
